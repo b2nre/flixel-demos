@@ -21,7 +21,7 @@ class PlayerShip extends FlxSprite
 	/**
 	 * Basic game loop function again!
 	 */
-	override public function update(elapsed:Float):Void
+	override public function update():Void  //elapsed:Float
 	{
 		// Controls!
 		
@@ -29,19 +29,19 @@ class PlayerShip extends FlxSprite
 		velocity.x = 0;	
 		
 		// If the player is pressing left, set velocity to left 100
-		if (FlxG.keys.anyPressed([LEFT, A]))
+		if (FlxG.keys.anyPressed(["LEFT", "A"]))
 		{
 			velocity.x -= 100;		
 		}
 		// If the player is pressing right, then right 100
-		if (FlxG.keys.anyPressed([RIGHT, D]))
+		if (FlxG.keys.anyPressed(["RIGHT", "D"]))
 		{
 			velocity.x += 100;		
 		}
 		
 		// Just like in PlayState, this is easy to forget but very important!
 		// Call this to automatically evaluate your velocity and position and stuff.
-		super.update(elapsed);
+		super.update(); // elapsed);
 		
 		// Here we are stopping the player from moving off the screen,
 		// with a little border or margin of 4 pixels.
@@ -68,6 +68,6 @@ class PlayerShip extends FlxSprite
 			bullet.velocity.y = -140;
 		}
 		
-		super.update(elapsed);
+		super.update(); // elapsed);
 	}
 }
