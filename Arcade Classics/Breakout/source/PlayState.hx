@@ -6,7 +6,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
-import flixel.math.FlxRandom;
+import flixel.util.FlxRandom;
 
 /**
 * Atari 2600 Breakout
@@ -95,9 +95,9 @@ class PlayState extends FlxState
 		add(_bricks);
 	}
 	
-	override public function update(elapsed:Float):Void
+	override public function update():Void  //elapsed:Float
 	{
-		super.update(elapsed);
+		super.update(); // elapsed);
 		
 		_bat.velocity.x = 0;
 		
@@ -124,11 +124,11 @@ class PlayState extends FlxState
 		}
 		#end
 		
-		if (FlxG.keys.anyPressed([LEFT, A]) && _bat.x > 10)
+		if ((FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A) && _bat.x > 10)
 		{
 			_bat.velocity.x = - BAT_SPEED;
 		}
-		else if (FlxG.keys.anyPressed([RIGHT, D]) && _bat.x < 270)
+		else if ((FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D) && _bat.x < 270)
 		{
 			_bat.velocity.x = BAT_SPEED;
 		}
@@ -180,7 +180,7 @@ class PlayState extends FlxState
 		{
 			// Ball is perfectly in the middle
 			// A little random X to stop it bouncing up!
-			Ball.velocity.x = 2 + FlxG.random.int(0, 8);
+			Ball.velocity.x = 2 + FlxRandom.intRanged(0, 8);			
 		}
 	}
 }
